@@ -57,6 +57,109 @@
             box-sizing: border-box;
         }
         
+        .clock {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #333;
+            border-radius: 50%;
+            background: white;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Marcações das horas */
+        .hour-marks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hour-mark {
+            position: absolute;
+            width: 4px;
+            height: 15px;
+            background: #333;
+            left: 50%;
+            top: 10px;
+            transform-origin: bottom center;
+            transform: translateX(-50%);
+        }
+
+        /* Números das horas */
+        .numbers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .number {
+            position: absolute;
+            font-size: 5%;
+            font-weight: bold;
+            color: #333;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Ponteiros */
+        .hand {
+            position: absolute;
+            transform-origin: bottom center;
+            bottom: 50%;
+            left: 50%;
+            border-radius: 10px 10px 0 0;
+            transform: translateX(-50%);
+        }
+
+        .hour-hand {
+            width: 3%;
+            height: 30%;
+            background: #333;
+        }
+
+        .minute-hand {
+            width: 1px;
+            height: 30%;
+            background: #666;
+        }
+
+        .second-hand {
+            width: 2px;
+            height: 50%;
+            background: #e74c3c;
+        }
+
+        /* Centro do relógio */
+        .center {
+            position: absolute;
+            width: 5%;
+            height: 5%;
+            background: #e74c3c;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            border: 2px solid #333;
+        }
+
+        /* Animações dos ponteiros */
+        @keyframes rotate {
+            from { transform: translateX(-50%) rotate(0deg); }
+            to { transform: translateX(-50%) rotate(360deg); }
+        }
+
+        .hour-hand {
+            animation: rotate 43200s linear infinite; /* 12 horas */
+        }
+
+        .minute-hand {
+            animation: rotate 3600s linear infinite; /* 60 minutos */
+        }
+
+        .second-hand {
+            animation: rotate 60s linear infinite; /* 60 segundos */
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -67,6 +170,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
         }
         
         .container {
@@ -74,10 +178,10 @@
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            max-width: 60%;
+            max-width: 70%;
             width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-direction: column;
             position: relative;
             animation: fadeIn 0.8s ease-out;
         }
@@ -92,6 +196,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            height: 450px;
             align-items: center;
             color: white;
             position: relative;
@@ -103,9 +208,6 @@
             position: absolute;
             width: 100%;
             aspect-ratio: auto;
-            background: url(gif.gif);
-            background-position: center;
-            background-size: 100% 100%;
             z-index: 1;
         }
         .hero-image::before {
@@ -131,7 +233,7 @@
         }
         
         .hero-image #img {
-            background: url(logo.jpeg); 
+            background: url(logo.gif); 
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
@@ -200,9 +302,9 @@
         }
         
         .benefit-icon {
-            width: 30px;
+            min-width: 30px;
             height: 30px;
-            background: var(--light);
+            background: rgba(255, 187, 0, 0.404);
             color: var(--primary);
             border-radius: 50%;
             display: flex;
@@ -211,10 +313,37 @@
             margin-right: 15px;
             flex-shrink: 0;
         }
+        .benefit-icon img{
+            height: 20px ;
+            width: auto;
+        }
         .cta-button1{
+            opacity: 1;
+        }
+        .cta-button2{
             opacity: 0;
-            background: rgb(9, 204, 58);
-            color: rgb(68, 2, 68);
+        }
+        .cta-button1 i,.cta-button2 i{
+            animation: dedo 0.9s ease-in-out infinite;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        @keyframes dedo {
+            0%{
+                transform: translateX(0px);
+            }
+            50%{
+                transform: translateX(10px);
+            }
+            100%{
+                transform: translateX(0px);
+            }
+        }
+        .cta-button1, .cta-button2{
+            display: flex;
+            align-items: center;
+            background: rgb(0, 189, 47);
+            color: rgb(255, 255, 255);
             padding: 10px 23px;
             border-radius: 50px;
             text-decoration: none;
@@ -223,18 +352,31 @@
             text-align: center;
             margin-top: 10px;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3), inset 0px 0px 21px rgba(206, 162, 17, 0.555),inset 0px 0px 11px rgba(0, 0, 0, 0.555);
+            border: 4px solid rgb(0, 0, 0);
             position: absolute;
             z-index: 10;
             bottom: 12px;
             overflow: hidden;
         }
-        .cta-button1:hover {
+        .cta-button1 span, .cta-button2 span{
+            display: flex;
+            align-items: center;
+        }
+        .cta-button1 span p, .cta-button2 span p{
+            font-size: 20px;
+            margin-bottom: 0;
+            color: rgb(255, 255, 255);
+        }
+        .cta-button1:hover, .cta-button2:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
         }
-        
-        .cta-button1::after {
+        .moeda{
+            height: 25px;
+            width: auto;
+        }
+        .cta-button1::after ,.cta-button2::after{
             content: "";
             position: absolute;
             top: 0;
@@ -320,26 +462,43 @@
             margin-right: 10px;
             font-size: 1.2rem;
         }
+        .video-fundo{
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+        .video-fundo video{
+            position: absolute;
+            height: 100%;
+            aspect-ratio: 1.91/1;
+        }
+
                 @media (max-width: 1168px) {
                     .container {
                         grid-template-columns: 1fr;
                         max-width: 70%;
                     }
                     .hero-image #img{
-                        height: 300px;
+                        height: 100%;
                         width: 100%;
-                        background: url(logo2.png);
+                        background: url(logo.gif);
                         background-size: 100% 100%;
                         background-position: center;
                         background-repeat: no-repeat;
 
                     }
-                    .cta-button1{
-                        opacity: 1;
-                    }
+
                 }
         @media (max-width: 768px) {
-
+            .cta-button1{
+            opacity: 0;
+        }
+        .cta-button2{
+            opacity: 1;
+        }
             
             .content {
                 padding: 30px 20px;
@@ -348,16 +507,10 @@
                     max-width: 100%;
                     grid-template-columns: 1fr;
                 }
-                    .cta-button1{
-                        opacity: 0;
-                    }
+
 
                 .hero-image{
-                    background: url(logo2.jpeg);
-                        background-size: 100% 100%;
-                        background-position: center;
-                        background-repeat: no-repeat;
-                        height: 500px;
+                        height: 270px;
                 }
 
         }
@@ -365,10 +518,18 @@
     </style>
 </head>
 <body>
+    <div class="video-fundo">
+        <video autoplay loop muted playsinline preload="auto">
+            <source src="back.webm" type="video/webm">
+        </video>  
+    </div>
     <div class="container">
         <div class="hero-image">
             <a href="https://w.app/qjwaxi" class="cta-button1">
-                <span>CLIQUE AQUI E ENTRE NO GRUPO</span>
+                <span><i class="fa-solid fa-hand-point-right"></i> <p> CLIQUE AQUI E ENTRE NO GRUPO</p></span>
+            </a>
+            <a href="https://w.app/qjwaxi" class="cta-button2">
+                <span><i class="fa-solid fa-hand-point-right"></i><p> VENHA JOGAR</p></span>
             </a>
             <div id="img" alt="Logo"></div>
             <div class="dinheiro"></div>
@@ -376,62 +537,78 @@
         
         <div class="content">
             <span class="badge">VAGAS LIMITADAS</span>
-            <h1>QUER UMA RENDA EXTRA?</h1>
-            <p>Você mora em Piripiri e regiões? Se torne cambistas e ganhe dinheiro do conforto da sua casa.  Além disso terá essas vantagens:</p>
+            <h1>P2 Poker Clube – O Clube de Poker de Pedro II</h1>
+            <p>Texas Hold’em e Omaha com estrutura profissional. Faça parte do nosso clube exclusivo</p>
             
             <div class="benefits">
                 <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fa-solid fa-building-ngo"></i>                    
-                    </div>
+
                     <div>
-                        <strong>Trabalhe com uma casa licenciada pelo Governo Federal</strong>
+                        <strong>O P2 Poker Clube foi criado para os apaixonados por Poker em Pedro II e Região . Aqui você encontra mesas profissionais, torneios e muito jogo de cash game em um ambiente seguro e divertido.</strong>
                     </div>
                 </div>
                 <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
                     <div>
-                        <strong>Faça seu horário</strong> - Longe das amarras de horário CLT.
+                        Jogos Disponíveis:
                     </div>
                 </div>
                 
                 <div class="benefit-item">
                     <div class="benefit-icon">
-                        <i class="fas fa-bolt"></i>
+                        <img alt="naipe" src="cartas.png"/>
                     </div>
                     <div>
-                        <strong>Tabalhe de casa</strong> - Aproveite o Home office 
+                        <strong>Texas Hold’em</strong> 
                     </div>
                 </div>
                 
                 <div class="benefit-item">
                     <div class="benefit-icon">
-                        <i class="fas fa-users"></i>
+                        <img alt="naipe" src="naipe.png"/>
                     </div>
                     <div>
-                        <strong>Aumente a sua renda</strong> - Adquira um dinheiro extra sem complicações.
+                        <strong>Omaha</strong>
                     </div>
                 </div>
                 
-                <div class="benefit-item">
+                <div class="benefit-item" style="margin-top: 40px;">
                     <div class="benefit-icon">
-                        <i class="fas fa-shield-alt"></i>
+                        <div class="clock">
+                            <!-- Marcações das horas -->
+
+                    
+                            <!-- Números -->
+                            <div class="numbers">
+                                <div class="number" style="top: 8%; left: 50%;">12</div>
+                                <div class="number" style="top: 50%; left: 92%;">3</div>
+                                <div class="number" style="top: 92%; left: 50%;">6</div>
+                                <div class="number" style="top: 50%; left: 8%;">9</div>
+                            </div>
+                    
+                            <!-- Ponteiros -->
+                            <div class="hand hour-hand"></div>
+                            <div class="hand minute-hand"></div>
+                            <div class="hand second-hand"></div>
+                            
+                            <!-- Centro -->
+                            <div class="center"></div>
+                        </div>
                     </div>
                     <div>
-                        <strong>Comissões de até 30%</strong> - Ganhe comforme seu desempenho.
+                        Horários de Funcionamento.
+                    </div>
+                </div>
+                <div class="benefit-item">
+
+                    <div>
+                        <strong>Todos Os dias: Apartir das <strong style=" padding: 0px 5px; background: rgb(182, 12, 12); color: white;"> 16:00</strong></strong>
                     </div>
                 </div>
             </div>
             
-            <a href="https://w.app/qjwaxi" class="cta-button">
-                <span><i class="fab fa-telegram"></i> FALE COM O GERENTE</span>
-            </a>
-            
             <div class="countdown">
-                <div class="countdown-item">16</div>
-                <span style="align-self: center; font-size: 0.8rem; margin-left: 5px;">vagas restantes</span>
+                <div class="countdown-item">Endereço</div>
+                <span style="align-self: center; font-size: 0.8rem; margin-left: 5px;">Endereço: Av: José Lourenço Mourão 350 - Pedro II</span>
             </div>
             
             <div class="guarantee">
@@ -468,13 +645,7 @@
         window.addEventListener('load', animateCountdown);
         
         // Efeito de flutuação para o ícone do troféu
-        const trophy = document.querySelector('.fa-trophy');
-        setInterval(() => {
-            trophy.style.transform = 'translateY(-5px)';
-            setTimeout(() => {
-                trophy.style.transform = 'translateY(0)';
-            }, 1000);
-        }, 2000);
+
     </script>
 </body>
 </html>
