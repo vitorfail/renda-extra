@@ -258,15 +258,21 @@
         .content {
             padding: 40px;
             display: flex;
+            position: relative;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
         }
-        
+        .content p{
+            text-align: left;
+            width: 100%;
+        }
         .badge {
             background: var(--accent);
             color: var(--text);
             padding: 5px 15px;
             border-radius: 50px;
+            margin-top: 40px;
             font-size: 0.8rem;
             font-weight: 600;
             display: inline-block;
@@ -324,7 +330,6 @@
             opacity: 0;
         }
         .cta-button1 i,.cta-button2 i{
-            animation: dedo 0.9s ease-in-out infinite;
             font-size: 20px;
             margin-right: 10px;
         }
@@ -340,6 +345,7 @@
             }
         }
         .cta-button1, .cta-button2{
+            margin-top:10px;
             display: flex;
             align-items: center;
             background: rgb(0, 189, 47);
@@ -348,23 +354,32 @@
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.5rem;
             text-align: center;
-            margin-top: 10px;
+            top: 0;
             transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3), inset 0px 0px 21px rgba(206, 162, 17, 0.555),inset 0px 0px 11px rgba(0, 0, 0, 0.555);
-            border: 4px solid rgb(0, 0, 0);
             position: absolute;
             z-index: 10;
+            height: fit-content;
+            animation: pulse 2s infinite;
             bottom: 12px;
             overflow: hidden;
+        }
+        @keyframes pulse {
+            0%, 100% {
+            box-shadow: 0 0 0 0 rgba(52, 219, 66, 0.751);
+        }
+
+        50% {
+            box-shadow: 0 0 0 18px rgba(52, 152, 219, 0);
+        }
         }
         .cta-button1 span, .cta-button2 span{
             display: flex;
             align-items: center;
         }
         .cta-button1 span p, .cta-button2 span p{
-            font-size: 20px;
             margin-bottom: 0;
             color: rgb(255, 255, 255);
         }
@@ -382,7 +397,6 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
             background: linear-gradient(to right, var(--secondary), var(--dark));
             opacity: 0;
             transition: opacity 0.3s;
@@ -503,6 +517,16 @@
             .content {
                 padding: 30px 20px;
             }
+            .badge{
+                align-self: center;
+                margin-top: 50px;
+            }
+            h1{
+                text-align: center;
+            }
+            .cta-button1 i, .cta-button2 i{
+                font-size: 1.9rem;
+            }
                 .container {
                     max-width: 100%;
                     grid-template-columns: 1fr;
@@ -525,17 +549,17 @@
     </div>
     <div class="container">
         <div class="hero-image">
-            <a href="https://chat.whatsapp.com/JOtu4g4TL2hLINNiEKnMtv" class="cta-button1">
-                <span><i class="fa-solid fa-hand-point-right"></i> <p> CLIQUE AQUI E ENTRE NO GRUPO</p></span>
-            </a>
-            <a href="https://chat.whatsapp.com/JOtu4g4TL2hLINNiEKnMtv" class="cta-button2">
-                <span><i class="fa-solid fa-hand-point-right"></i><p> VENHA JOGAR</p></span>
-            </a>
             <div id="img" alt="Logo"></div>
             <div class="dinheiro"></div>
         </div>
         
         <div class="content">
+                        <a href="https://chat.whatsapp.com/JOtu4g4TL2hLINNiEKnMtv" class="cta-button1">
+                <span><i class="fa-brands fa-whatsapp"></i> <p> GRUPO DO CLUBE</p></span>
+            </a>
+            <a href="https://chat.whatsapp.com/JOtu4g4TL2hLINNiEKnMtv" class="cta-button2">
+                <span><i class="fa-brands fa-whatsapp"></i><p> GRUPO DO CLUBE</p></span>
+            </a>
             <span class="badge">VAGAS LIMITADAS</span>
             <h1>P2 Poker Clube – O Clube de Poker de Pedro II</h1>
             <p>Texas Hold’em e Omaha com estrutura profissional. Faça parte do nosso clube exclusivo</p>
